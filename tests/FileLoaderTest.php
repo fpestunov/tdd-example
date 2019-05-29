@@ -14,7 +14,7 @@ class FileLoaderTest extends TestCase
     {
         $f = new FileLoader;
         $r = $f->get(__DIR__.'/fixtures/simple.md');
-        $this->assertEquals("Foo\n", $r);
+        $this->assertEquals("Foo\r\n", $r);
     }
 
     public function testFileLoaderReturnsFalseWhenFileDoesNotExist()

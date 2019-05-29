@@ -34,4 +34,15 @@ class MarkdownParserTest extends TestCase
         $r = $m->parseImages($e);
         $this->assertEquals('foo <img src="baz" alt="bar" /> boo', $r);
     }    
+
+    public function testCompleteMarkdownCanBeParsed()
+    {
+        $m = new MarkdownParser;
+
+        $input = 'The **quick** brown [fox](jumped) over the ![lazy](dog).';
+        $expected = 'The <strong>quick</strong> brown <a href="jumped">fox</a>'.
+            ' over the <img src="dog" alt="lazy" />.';
+        $r = $m->parse($input);
+        $this->assertEquals($expected, $r);
+    }    
 }

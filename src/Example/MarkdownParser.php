@@ -5,6 +5,36 @@ namespace Example;
 class MarkdownParser
 {
 	/**
+	 * Register parser methods.
+	 *
+	 * @var array
+	 */
+	private $parsers = array(
+	    'bold',
+	    'images',
+	    'links'
+	);
+
+	/**
+	 * Parse a Markdown string into HTML.
+	 *
+	 * @param  string $source
+	 * @return string
+	 */
+	public function parse($source)
+	{
+		foreach ($this->parsers as $parser) {
+		    $parser = 'parse'.ucfirst($parser);
+		    $source = call_user_func(array($this, $parser), $source);
+		}
+		return $source;
+				
+	    // $source = $this->parseBold($source);
+	    // $source = $this->parseImages($source);
+	    // return $this->parseLinks($source);
+	}
+
+	/**
 	 * Parse bold markdown text to <strong> tag.
 	 *
 	 * @param string $source
